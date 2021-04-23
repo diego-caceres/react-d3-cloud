@@ -10,6 +10,15 @@ import { defaultFontSizeMapper } from './defaultMappers';
 
 const fill = scaleOrdinal(schemeCategory10);
 
+const getComputedIndex = (id, max) => {
+  let sum = 0;
+  for (let i = 0; i < id.length; i++) {
+    sum += id.charCodeAt(i);
+  }
+
+  return sum ? (sum % max) : 0;
+}
+
 class WordCloud extends Component {
   static propTypes = {
     data: PropTypes.arrayOf(
@@ -24,6 +33,7 @@ class WordCloud extends Component {
     padding: PropTypes.oneOfType([PropTypes.number, PropTypes.func]),
     rotate: PropTypes.oneOfType([PropTypes.number, PropTypes.func]),
     width: PropTypes.number,
+    colors: PropTypes.arrayOf(PropTypes.string),
     onWordClick: PropTypes.func,
     onWordMouseOut: PropTypes.func,
     onWordMouseOver: PropTypes.func,
@@ -36,6 +46,7 @@ class WordCloud extends Component {
     font: 'serif',
     fontSizeMapper: defaultFontSizeMapper,
     rotate: 0,
+    colors: [],
     onWordClick: null,
     onWordMouseOver: null,
     onWordMouseOut: null,
@@ -54,6 +65,7 @@ class WordCloud extends Component {
       font,
       fontSizeMapper,
       rotate,
+      colors,
       onWordClick,
       onWordMouseOver,
       onWordMouseOut,
@@ -63,6 +75,13 @@ class WordCloud extends Component {
     select(this.wordCloud)
       .selectAll('*')
       .remove();
+
+    const fillColor = (colors.length === 0)
+      ? (d, i) => fill(i)
+      : (d, i) => {
+        console.log('Dado WordCloud', d);
+        return (i < colors.length ? colors[i] : colors[0])
+      };
 
     // render based on new data
     const layout = cloud()
@@ -88,7 +107,7 @@ class WordCloud extends Component {
           .append('text')
           .style('font-size', d => `${d.size}px`)
           .style('font-family', font)
-          .style('fill', (d, i) => fill(i))
+          .style('fill', fillColor)
           .attr('text-anchor', 'middle')
           .attr('transform', d => `translate(${[d.x, d.y]})rotate(${d.rotate})`)
           .text(d => d.text);
