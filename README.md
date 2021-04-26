@@ -11,7 +11,7 @@ A word cloud react component built with [d3-cloud](https://github.com/jasondavie
 ## Usage
 
 ```sh
-npm install react-d3-cloud
+npm install @diego.caceres/react-d3-cloud
 ```
 
 ```jsx
@@ -51,6 +51,7 @@ for more detailed props, please refer to below:
 | rotate          | Map each element of `data` to font rotation degree. Or simply provide a number for global rotation. (degree) | Function \| number                              |          | 0                     |
 | padding         | Map each element of `data` to font padding. Or simply provide a number for global padding. (px)              | Function \| number                              |          | 5                     |
 | font            | The font of text shown                                                                                       | Function \| string                              |          | serif                 |
+| colors          | Array of colors to use in the world cloud (optional)                                                         | Array<string>                                   |          | []                    |
 | onWordClick     | Function called when click event triggered on a word                                                         | Function: `word => {}`                          |          | null                  |
 | onWordMouseOver | Function called when mouseover event triggered on a word                                                     | Function: `word => {}`                          |          | null                  |
 | onWordMouseOut  | Function called when mouseout event triggered on a word                                                      | Function: `word => {}`                          |          | null                  |

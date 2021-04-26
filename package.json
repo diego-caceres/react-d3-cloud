@@ -1,17 +1,17 @@
 {
-  "name": "react-d3-cloud",
+  "name": "@diego.caceres/react-d3-cloud",
   "description": "a word cloud component using d3-cloud",
   "license": "MIT",
-  "author": "cph",
-  "homepage": "https://github.com/Yoctol/react-d3-cloud#readme",
+  "author": "Dado",
+  "homepage": "https://github.com/diego-caceres/react-d3-cloud#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Yoctol/react-d3-cloud.git"
+    "url": "git+https://github.com/diego-caceres/react-d3-cloud"
   },
   "bugs": {
-    "url": "https://github.com/Yoctol/react-d3-cloud/issues"
+    "url": "https://github.com/diego-caceres/react-d3-cloud/issues"
   },
-  "version": "0.7.0",
+  "version": "0.7.1",
   "main": "lib/index.js",
   "scripts": {
     "build": "cross-env NODE_ENV=production npm run build:dev",

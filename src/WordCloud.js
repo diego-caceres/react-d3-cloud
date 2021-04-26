@@ -16,11 +16,12 @@ const getComputedIndex = (id, max) => {
     sum += id.charCodeAt(i);
   }
 
-  return sum ? (sum % max) : 0;
-}
+  return sum ? sum % max : 0;
+};
 
 class WordCloud extends Component {
   static propTypes = {
+    colors: PropTypes.arrayOf(PropTypes.string),
     data: PropTypes.arrayOf(
       PropTypes.shape({
         text: PropTypes.string.isRequired,
@@ -33,7 +34,6 @@ class WordCloud extends Component {
     padding: PropTypes.oneOfType([PropTypes.number, PropTypes.func]),
     rotate: PropTypes.oneOfType([PropTypes.number, PropTypes.func]),
     width: PropTypes.number,
-    colors: PropTypes.arrayOf(PropTypes.string),
     onWordClick: PropTypes.func,
     onWordMouseOut: PropTypes.func,
     onWordMouseOver: PropTypes.func,
@@ -76,12 +76,13 @@ class WordCloud extends Component {
       .selectAll('*')
       .remove();
 
-    const fillColor = (colors.length === 0)
-      ? (d, i) => fill(i)
-      : (d, i) => {
-        console.log('Dado WordCloud', d);
-        return (i < colors.length ? colors[i] : colors[0])
-      };
+    const fillColor =
+      colors.length === 0
+        ? (d, i) => fill(i)
+        : d => {
+            const colorIndex = getComputedIndex(d.text, colors.length);
+            return colors[colorIndex];
+          };
 
     // render based on new data
     const layout = cloud()
